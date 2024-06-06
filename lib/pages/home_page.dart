@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
       await _googleSignIn.signOut();
       print('Google sign-out successful');
     } catch (e) {
+      //Error message
       print("Error signing out: $e");
     }
   }
