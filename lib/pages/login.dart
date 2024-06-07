@@ -23,10 +23,20 @@ class _LogInState extends State<LogIn> {
     try {
       final user=await AuthServices.signInWithGoogle();
       if(user!=null){
+        //Retriveing data
+        final userEmail=user.email!;
+        final userName=user.displayName!;
+        final imageUrl=user.photoURL!;
         if(context.mounted){
           Navigator.pop(context);
         }
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>HomePage()));
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+                builder: (context)=>HomePage(
+                  userEmail: userEmail,
+                  userName: userName,
+                  photoUrl: imageUrl,
+                )));
       }
     } on FirebaseAuthException catch(e){
       Navigator.pop(context);

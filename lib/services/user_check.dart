@@ -15,7 +15,13 @@ class AuthPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             if (snapshot.hasData) {
-              return const HomePage();
+              //Data retriveal
+              User user = snapshot.data!;
+              String email = user.email!;
+              String name = user.displayName ?? 'No Name';
+              String photoUrl = user.photoURL!;
+              
+              return HomePage(userEmail: email, userName: name, photoUrl: photoUrl);
             } else {
               return const LogIn();
             }

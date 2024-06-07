@@ -6,15 +6,18 @@ import 'drawer.dart';
 
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String userEmail;
+  final String userName;
+  final String photoUrl;
+  const HomePage({super.key,required this.userEmail,required this.userName,required this.photoUrl});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<void> signOut() async {
@@ -40,6 +43,11 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          //Displaying data
+          Text(widget.userEmail),
+          Text(widget.userName),
+          Image.network(widget.photoUrl),
+
           TextButton(onPressed: signOut, child: Text("Sign Out")),
         ],
       ),
