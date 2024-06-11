@@ -2,7 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mis_hub/components/square_boxes.dart';
+import 'package:mis_hub/rest_api.dart';
+import 'package:mis_hub/services/http_post.dart';
 import 'package:mis_hub/services/sign_in.dart';
+import 'package:mis_hub/test_server/post_test.dart';
 import 'home_page.dart';
 
 class LogIn extends StatefulWidget {
@@ -27,6 +30,11 @@ class _LogInState extends State<LogIn> {
         final userEmail=user.email!;
         final userName=user.displayName!;
         final imageUrl=user.photoURL!;
+        //Test post
+        // sendPostRequest();
+
+        //Passing the user ----
+        postProfile(user);
         if(context.mounted){
           Navigator.pop(context);
         }

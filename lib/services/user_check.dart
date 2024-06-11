@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mis_hub/test_server/get_test.dart';
 
 import '../pages/home_page.dart';
 import '../pages/login.dart';
@@ -20,6 +21,8 @@ class AuthPage extends StatelessWidget {
               String email = user.email!;
               String name = user.displayName ?? 'No Name';
               String photoUrl = user.photoURL!;
+              //Passing the user
+              sendGetRequest(user);
               
               return HomePage(userEmail: email, userName: name, photoUrl: photoUrl);
             } else {
