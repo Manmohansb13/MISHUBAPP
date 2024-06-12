@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
-Future<void> sendGetRequest(User user) async {
+Future<void> sendGetRequest(String uuid) async {
   // Define the URL with the user ID parameter
-  final String userId = '';
-  final String url = "https://mis-hub-backend-git-main-amrit-sundarkas-projects.vercel.app/profile/get_profile/?${user.uid}";
-  // Send the GET request
+  print(uuid);
+  String u = uuid.replaceAll('"', ''); // Remove quotation marks from the UUID
+  String url = "https://mis-hub-backend-git-main-amrit-sundarkas-projects.vercel.app/profile/get_profile/?user_id=$u";
+  print("URL: $url");
+
   final response = await http.get(Uri.parse(url));
 
   // Handle the response

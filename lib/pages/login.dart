@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mis_hub/components/square_boxes.dart';
 import 'package:mis_hub/rest_api.dart';
@@ -15,6 +16,10 @@ class LogIn extends StatefulWidget {
   State<LogIn> createState() => _LogInState();
 }
 class _LogInState extends State<LogIn> {
+  final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+
+
+
   //Sign In
   void onTap() async{
     showDialog(
@@ -34,7 +39,17 @@ class _LogInState extends State<LogIn> {
         // sendPostRequest();
 
         //Passing the user ----
-        postProfile(user);
+
+
+        String? uuid=await postProfile(user);
+        print(uuid);
+        if (uuid != null) {
+          await _secureStorage.write(key: 'uuid', value: uuid);
+          print("Secure storage success");
+        }
+
+
+
         if(context.mounted){
           Navigator.pop(context);
         }

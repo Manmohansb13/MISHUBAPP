@@ -22,7 +22,7 @@ class AuthPage extends StatelessWidget {
               String name = user.displayName ?? 'No Name';
               String photoUrl = user.photoURL!;
               //Passing the user
-              sendGetRequest(user);
+              // sendGetRequest(user);
               
               return HomePage(userEmail: email, userName: name, photoUrl: photoUrl);
             } else {

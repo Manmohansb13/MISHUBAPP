@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mis_hub/pages/search_page.dart';
 import 'package:mis_hub/test_server/get_test.dart';
@@ -25,9 +26,10 @@ class _HomePageState extends State<HomePage> {
 
   // Firebase
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final _searchController=TextEditingController();
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  final storage = new FlutterSecureStorage();
 
   Future<void> signOut() async {
     try {
@@ -40,6 +42,36 @@ class _HomePageState extends State<HomePage> {
       print("Error signing out: $e");
     }
   }
+
+  Future<void> test() async {
+    try {
+      bool containsKey = await storage.containsKey(key: 'uuid');
+      if (containsKey) {
+        String? uid = await storage.read(key: 'uuid');
+        print("User uid: ");
+        print(uid);
+      } else {
+        print('Key "uuid" does not exist.');
+      }
+    } catch (e) {
+      print('Error occurred: $e');
+    }
+  }
+
+  Future<void> getter() async {
+    try {
+      bool containsKey = await storage.containsKey(key: 'uuid');
+      if (containsKey) {
+        String? uid = await storage.read(key: 'uuid');
+        sendGetRequest(uid!);
+      } else {
+        print('Key "uuid" does not exist.');
+      }
+    } catch (e) {
+      print('Error occurred: $e');
+    }
+  }
+
 
 
 
@@ -77,7 +109,12 @@ class _HomePageState extends State<HomePage> {
           Text(widget.userName),
           Image.network(widget.photoUrl),
           SizedBox(height: 20,),
-          TextButton(onPressed: (){}, child: Text("Get data")),
+          TextButton(onPressed: () async{
+            await test();
+          }, child: Text("Get data")),
+          TextButton(onPressed: () async{
+            await getter();
+          }, child: Text("Get All")),
         ],
       ),
     );

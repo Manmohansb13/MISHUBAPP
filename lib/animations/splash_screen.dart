@@ -11,11 +11,14 @@ class splashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(child: LottieBuilder.asset("ass/Animation - 1717558551512.json"))
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(top: 70),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(child: LottieBuilder.asset("ass/Animation - 1717558551512.json"))
+            ],
+          ),
         ),
       ),
       duration: 4000,

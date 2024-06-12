@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 
-Future<void> postProfile(User user) async{
+Future<String?> postProfile(User user) async{
+
   final url=Uri.parse("https://mis-hub-backend-git-main-amrit-sundarkas-projects.vercel.app/profile/set_profile/");
   final response=await http.post(url,
   headers: {
@@ -24,7 +26,10 @@ Future<void> postProfile(User user) async{
   );
   if(response.statusCode==200){
     print("Profile Set successfully");
+    String uuid=response.body;
     print(response.body);
+    return uuid;
+
   }
   else{
     print('Failed to set profile: ${response.body}');

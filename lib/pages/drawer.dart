@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mis_hub/pages/profile_page.dart';
 import 'package:mis_hub/pages/search_page.dart';
 
 import '../components/list_tile.dart';
@@ -45,7 +46,10 @@ class MyDrawer extends StatelessWidget {
               ),
               MyListTile(icon: Icons.history, title: "H I S T O R Y",onTap: (){},),
               MyListTile(icon: Icons.upload, title:"U P L O A D",onTap: (){},),
-              MyListTile(icon: Icons.person, title: "P R O F I L E",onTap: (){},),
+              MyListTile(icon: Icons.person, title: "P R O F I L E",onTap: ()=>Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context)=>ProfilePage()),
+              ),),
               MyListTile(icon: Icons.info, title: "A B O U T",onTap: (){},),
             ],
           ),
