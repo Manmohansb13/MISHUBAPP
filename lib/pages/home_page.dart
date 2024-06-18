@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mis_hub/pages/search_page.dart';
-import 'package:mis_hub/test_server/get_test.dart';
-
-import '../search_subjects/subjects.dart';
-import '../subject_page/subject_page_file.dart';
 import 'drawer.dart';
 
 
@@ -38,39 +34,14 @@ class _HomePageState extends State<HomePage> {
       print('Firebase sign-out successful');
       await _googleSignIn.signOut();
       print('Google sign-out successful');
+      await storage.delete(key: 'uuid');
+      print('UUID deleted from secure storage');
     } catch (e) {
       print("Error signing out: $e");
     }
   }
 
-  Future<void> test() async {
-    try {
-      bool containsKey = await storage.containsKey(key: 'uuid');
-      if (containsKey) {
-        String? uid = await storage.read(key: 'uuid');
-        print("User uid: ");
-        print(uid);
-      } else {
-        print('Key "uuid" does not exist.');
-      }
-    } catch (e) {
-      print('Error occurred: $e');
-    }
-  }
 
-  Future<void> getter() async {
-    try {
-      bool containsKey = await storage.containsKey(key: 'uuid');
-      if (containsKey) {
-        String? uid = await storage.read(key: 'uuid');
-        sendGetRequest(uid!);
-      } else {
-        print('Key "uuid" does not exist.');
-      }
-    } catch (e) {
-      print('Error occurred: $e');
-    }
-  }
 
 
 
@@ -109,12 +80,6 @@ class _HomePageState extends State<HomePage> {
           Text(widget.userName),
           Image.network(widget.photoUrl),
           SizedBox(height: 20,),
-          TextButton(onPressed: () async{
-            await test();
-          }, child: Text("Get data")),
-          TextButton(onPressed: () async{
-            await getter();
-          }, child: Text("Get All")),
         ],
       ),
     );

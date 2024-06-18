@@ -40,7 +40,6 @@ class _LogInState extends State<LogIn> {
 
         //Passing the user ----
 
-
         String? uuid=await postProfile(user);
         print(uuid);
         if (uuid != null) {
